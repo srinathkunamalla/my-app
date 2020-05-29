@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
+import logo from './assests/logo.svg';
 import Person from "./Person/Person";
+import styled from 'styled-components';
+
+const styedButton = styled.button`
+backgroundColor: green,
+font: inherit,
+border: 1px solid blue,
+padding: 8px,
+cursor: pointer,
+&:hover': {
+  backgroundColor: lightgreen,
+  color: black
+}
+
+`;
+ 
 
 class App extends Component {
   state = {
@@ -56,12 +72,16 @@ class App extends Component {
 
   render () {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
-    }
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
+    };
 
     let persons = null;
 
@@ -78,19 +98,30 @@ class App extends Component {
             />
           })}
         </div>
-
       );
+      style.backgroundColor='red';
+      style['hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
+    const classes = [];
+    if (this.state.persons.length <=2 ) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <=1 ) {
+      classes.push('bold');
+    }
 
     return (
       <div className="App">
         <header className="App-header">
           <h1>Srinath Kunamalla</h1>
-          <p>React Programmer</p>
-            <button 
+          <p className={classes.join(' ')}>React Programmer</p>
+            <styedButton 
             style = {style}
-            onClick={this.togglePersonHandler}>Click me</button>
+            onClick={this.togglePersonHandler}>Click me</styedButton>
             {persons}
             <Person name="Srinath Kunamalla">
               My Hobbies: Gaming          </Person>
